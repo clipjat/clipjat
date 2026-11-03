@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#090909"><title>Clipjat — Watch Beyond Limits</title>
+<style>
+:root{--bg:#090909;--panel:#171717;--line:#303030;--gold:#d7ad4b;--red:#ed3434;--muted:#aaa;--white:#f7f5ef}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--white);font-family:Arial,sans-serif}button,input{font:inherit;cursor:pointer}header{height:68px;display:flex;align-items:center;gap:18px;padding:0 4%;border-bottom:1px solid var(--line);position:sticky;top:0;background:#090909f5;z-index:5}.brand{display:flex;align-items:center;gap:10px;min-width:175px}.mark{width:38px;height:38px;border:2px solid var(--gold);border-radius:11px;display:grid;place-items:center;color:var(--gold);font-size:20px;font-weight:bold}.brandname{font-size:22px;font-weight:900;letter-spacing:1px}.brandname span{color:var(--gold)}.search{display:flex;flex:1;max-width:650px;margin:auto}.search input{width:100%;background:#171717;border:1px solid #383838;border-radius:24px 0 0 24px;padding:11px 16px;color:white;outline:none}.search button,.pill{background:#222;color:white;border:1px solid #383838;padding:10px 17px}.search button{border-radius:0 24px 24px 0}.actions{display:flex;gap:9px}.pill,.goldbtn{border-radius:22px}.goldbtn{background:var(--gold);color:#111;border:0;padding:11px 16px;font-weight:bold}.layout{display:grid;grid-template-columns:205px 1fr;max-width:1500px;margin:auto}.side{padding:20px 12px;border-right:1px solid var(--line);min-height:calc(100vh - 68px)}.navitem{display:flex;gap:13px;align-items:center;padding:12px 14px;border-radius:10px;color:#ddd;margin:3px 0}.navitem.active,.navitem:hover{background:#222;color:var(--gold)}.navicon{width:20px;text-align:center}hr{border:0;border-top:1px solid var(--line);margin:17px 8px}.side small{color:var(--muted);padding:0 14px}main{padding:24px 3%;min-width:0}.hero{border:1px solid #49391d;border-radius:18px;padding:30px;background:radial-gradient(circle at 85% 15%,#493719,#1c1710 28%,#111 68%);display:flex;justify-content:space-between;align-items:center}.eyebrow{color:var(--gold);font-size:12px;letter-spacing:2px;font-weight:bold}.hero h1{font-size:clamp(32px,4vw,48px);line-height:1.05;margin:12px 0}.hero p{color:#c9c2b6;max-width:520px;line-height:1.6}.cta{display:inline-block;background:var(--gold);color:#111;text-decoration:none;padding:12px 20px;border-radius:24px;font-weight:bold}.hero-art{font-size:150px;font-weight:900;color:#d7ad4b2b;padding:0 35px}.adslot{border:1px dashed #65532d;background:#15120c;border-radius:12px;text-align:center;padding:13px;color:#c9ad70;margin:20px 0;font-size:12px}.adslot b{display:block;color:var(--gold);font-size:11px;margin-bottom:5px}.sectionhead{display:flex;justify-content:space-between;align-items:center;margin:26px 0 14px}.sectionhead h2{font-size:21px;margin:0}.sectionhead a{color:var(--gold);font-size:13px;text-decoration:none}.chips{display:flex;gap:9px;overflow:auto;padding-bottom:8px}.chip{white-space:nowrap;background:#1a1a1a;border:1px solid #333;color:#ddd;border-radius:20px;padding:8px 15px}.chip.active{background:var(--gold);color:#111;font-weight:bold}.videos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px 16px}.video{min-width:0}.thumb{aspect-ratio:16/9;border-radius:12px;position:relative;overflow:hidden;background:linear-gradient(135deg,#46351d,#151515);display:grid;place-items:center}.thumb:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 70% 30%,#d7ad4b55,transparent 48%)}.visual{position:absolute;font-size:52px;opacity:.8}.play{width:46px;height:46px;border-radius:50%;background:#000a;display:grid;place-items:center;z-index:1}.duration{position:absolute;right:8px;bottom:8px;background:#000c;padding:4px 7px;border-radius:4px;font-size:11px}.video h3{font-size:14px;line-height:1.4;margin:9px 0 5px}.meta{font-size:12px;color:var(--muted)}.creator{display:flex;gap:9px;align-items:center;margin-top:8px}.avatar{width:29px;height:29px;border-radius:50%;background:#393024;color:var(--gold);display:grid;place-items:center;font-weight:bold}.shorts{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}.short{aspect-ratio:9/15;border-radius:12px;position:relative;overflow:hidden;background:linear-gradient(155deg,#63321f,#171717 58%,#443014);display:grid;place-items:center;text-align:center;padding:12px}.short:nth-child(2){background:linear-gradient(155deg,#174b55,#151515 60%,#33254e)}.short:nth-child(3){background:linear-gradient(155deg,#5a4420,#151515 60%,#2b1d38)}.short:nth-child(4){background:linear-gradient(155deg,#304b2a,#151515 60%,#512b2b)}.short:nth-child(5){background:linear-gradient(155deg,#39234d,#151515 60%,#55401f)}.short strong{font-size:18px;text-shadow:0 2px 8px #000}.short span{position:absolute;bottom:9px;left:9px;font-size:11px;background:#0009;padding:5px;border-radius:5px}footer{border-top:1px solid var(--line);padding:22px 4%;color:var(--muted);font-size:12px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+@media(max-width:950px){.layout{grid-template-columns:70px 1fr}.side{padding:16px 7px}.navitem{justify-content:center;padding:12px 3px}.navitem .label,.side small{display:none}.videos{grid-template-columns:repeat(2,minmax(0,1fr))}.shorts{grid-template-columns:repeat(5,130px);overflow:auto}.brand{min-width:auto}.brandname{font-size:19px}}
+@media(max-width:620px){header{height:59px;padding:0 11px;gap:9px}.brandname{display:none}.mark{width:34px;height:34px}.brand{min-width:auto}.search input{min-width:0;padding:9px 11px}.search button{padding:0 13px}.actions .pill{display:none}.layout{display:block}.side{position:fixed;z-index:8;bottom:0;left:0;right:0;height:58px;min-height:0;background:#101010;border:0;border-top:1px solid var(--line);display:flex;justify-content:space-around;padding:4px}.navitem{flex:1;display:flex;flex-direction:column;gap:2px;font-size:10px;padding:4px 1px}.navitem .label{display:block;font-size:9px}hr,.side small{display:none}main{padding:15px 12px 76px}.hero{padding:22px 17px}.hero h1{font-size:32px}.hero-art{display:none}.videos{gap:17px 9px}.video h3{font-size:13px}.shorts{grid-template-columns:repeat(5,116px)}.sectionhead h2{font-size:18px}}
+
+.menu-toggle{background:transparent;border:1px solid #333;color:var(--gold);border-radius:9px;width:39px;height:39px;font-size:20px;flex:none}
+.drawer-head{display:flex;align-items:center;justify-content:space-between;padding:4px 12px 17px;border-bottom:1px solid var(--line);margin-bottom:12px;color:#eee;letter-spacing:.7px}
+.drawer-head span{color:var(--gold)}.drawer-close{background:transparent;border:0;color:#ddd;font-size:27px}
+.drawer-scrim{display:none}
+.bottom-nav{display:none}
+@media(max-width:950px){.layout{display:block}.side{position:fixed;z-index:30;top:0;bottom:0;left:0;width:270px;min-height:0;height:100dvh;background:#111;border-right:1px solid #39312a;padding:18px 13px;transform:translateX(-105%);transition:transform .22s ease;overflow:auto}.side.open{transform:translateX(0)}.side .navitem{display:flex;justify-content:flex-start;flex-direction:row;padding:13px 14px;font-size:14px}.side .navitem .label{display:block;font-size:14px}.side small{display:block}.side hr{display:block}.drawer-scrim.show{display:block;position:fixed;inset:0;background:#0009;z-index:29}.bottom-nav{display:flex;position:fixed;z-index:20;bottom:0;left:0;right:0;height:62px;background:#101010;border-top:1px solid var(--line);justify-content:space-around;padding:5px 10px calc(5px + env(safe-area-inset-bottom))}.bottom-item{flex:1;border:0;background:transparent;color:#aaa;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}.bottom-item span{font-size:20px}.bottom-item small{font-size:10px}.bottom-item.active{color:var(--gold)}main{padding-bottom:88px}}
+@media(min-width:951px){.side{position:fixed;z-index:30;top:68px;bottom:0;left:0;width:250px;min-height:0;height:calc(100vh - 68px);background:#111;transform:translateX(-105%);transition:transform .22s ease;overflow:auto}.side.open{transform:translateX(0)}.drawer-scrim.show{display:block;position:fixed;inset:68px 0 0;background:#0009;z-index:29}.layout{display:block}.bottom-nav{display:none}}
+</style>
+<style>
+/* Drawer navigation: one menu item per row */
+#drawer nav, .drawer nav, .drawer-nav, .drawer-links, .drawer-menu,
+.drawer-content nav, .drawer-items {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  gap: 8px;
+}
+#drawer nav a, .drawer nav a, .drawer-nav a, .drawer-links a,
+.drawer-menu a, .drawer-content nav a, .drawer-items a {
+  display: flex !important;
+  width: 100%;
+  box-sizing: border-box;
+}
+</style>
+
+
+<style>
+/* Verified fix: the mobile bottom-bar rule made .side a flex row.
+   Reset the drawer itself to a vertical column on all screen sizes. */
+.side {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  justify-content: flex-start !important;
+}
+.side > .navitem {
+  display: flex !important;
+  flex-direction: row !important;
+  flex: 0 0 auto !important;
+  width: 100% !important;
+  min-height: 44px;
+  box-sizing: border-box;
+}
+.side > hr {
+  flex: 0 0 auto !important;
+  width: auto;
+}
+.side > .drawer-head,
+.side > small {
+  flex: 0 0 auto !important;
+}
+</style>
+
+</head><body>
+<header><button class="menu-toggle" onclick="toggleDrawer()" aria-label="Open menu">☰</button><div class="brand"><div class="mark">▶</div><div class="brandname">CLIP<span>JAT</span></div></div><div class="search"><input id="search" placeholder="Search videos, creators..." aria-label="Search"><button onclick="searchVideos()">⌕</button></div><div class="actions"><button class="pill" onclick="alert('Sign-in will be added in a future version.')">Sign in</button><button class="goldbtn" onclick="alert('Video upload will be available when accounts and video storage are connected.')">＋ Upload</button></div></header>
+<div class="layout">
+<aside class="side" id="drawer" aria-label="Main menu">
+  <div class="drawer-head"><strong>CLIP<span>JAT</span> MENU</strong><button class="drawer-close" onclick="toggleDrawer(false)" aria-label="Close menu">×</button></div>
+  <div class="navitem active"><span class="navicon">⌂</span><span class="label">Home</span></div>
+  <div class="navitem"><span class="navicon">▶</span><span class="label">Shorts</span></div>
+  <div class="navitem"><span class="navicon">▣</span><span class="label">Subscriptions</span></div>
+  <hr>
+  <div class="navitem"><span class="navicon">◷</span><span class="label">History</span></div>
+  <div class="navitem"><span class="navicon">♡</span><span class="label">Liked videos</span></div>
+  <div class="navitem"><span class="navicon">♙</span><span class="label">Your channel</span></div>
+  <hr><small>CREATOR & ACCOUNT</small>
+  <div class="navitem"><span class="navicon">◈</span><span class="label">Creator Studio</span></div>
+  <div class="navitem"><span class="navicon">＄</span><span class="label">Monetization</span></div>
+  <div class="navitem"><span class="navicon">⚙</span><span class="label">Settings</span></div>
+  <div class="navitem"><span class="navicon">ⓘ</span><span class="label">Help & Feedback</span></div>
+</aside>
+<div class="drawer-scrim" id="drawerScrim" onclick="toggleDrawer(false)"></div>
+<main><section class="hero"><div><div class="eyebrow">A NEW WAY TO WATCH</div><h1>WATCH<br><span style="color:var(--gold)">BEYOND LIMITS.</span></h1><p>Discover videos, explore fresh ideas and share the moments that matter. Welcome to Clipjat.</p><a class="cta" href="#trending">Explore videos&nbsp; →</a></div><div class="hero-art">C</div></section>
+<div class="adslot"><b>ADVERTISEMENT · BANNER</b>Premium banner advertising space</div>
+<div class="sectionhead"><h2>Explore</h2></div><div class="chips"><button class="chip active" onclick="filterVideos('All',this)">All</button><button class="chip" onclick="filterVideos('Music',this)">Music</button><button class="chip" onclick="filterVideos('Gaming',this)">Gaming</button><button class="chip" onclick="filterVideos('Technology',this)">Technology</button><button class="chip" onclick="filterVideos('Education',this)">Education</button><button class="chip" onclick="filterVideos('Sports',this)">Sports</button><button class="chip" onclick="filterVideos('Entertainment',this)">Entertainment</button></div>
+<section id="trending"><div class="sectionhead"><h2>Trending videos</h2><a href="#">See all</a></div><div class="videos" id="videos">
+<article class="video" data-category="Technology"><div class="thumb"><span class="visual">✦</span><span class="play">▶</span><span class="duration">12:45</span></div><h3>Discover the technology shaping tomorrow</h3><div class="creator"><div class="avatar">T</div><div class="meta">Tech World<br>12K views · 2 days ago</div></div></article>
+<article class="video" data-category="Music"><div class="thumb" style="background:linear-gradient(135deg,#572c43,#17121d)"><span class="visual">♫</span><span class="play">▶</span><span class="duration">4:32</span></div><h3>Sounds and melodies for your day</h3><div class="creator"><div class="avatar">M</div><div class="meta">Music Lane<br>8.4K views · 1 day ago</div></div></article>
+<article class="video" data-category="Gaming"><div class="thumb" style="background:linear-gradient(135deg,#1e4a43,#111827)"><span class="visual">🎮</span><span class="play">▶</span><span class="duration">18:09</span></div><h3>Epic gameplay moments and highlights</h3><div class="creator"><div class="avatar">G</div><div class="meta">Play Arena<br>25K views · 5 hours ago</div></div></article>
+<article class="video" data-category="Education"><div class="thumb" style="background:linear-gradient(135deg,#59451d,#171717)"><span class="visual">✎</span><span class="play">▶</span><span class="duration">09:18</span></div><h3>Learn something useful in a few minutes</h3><div class="creator"><div class="avatar">L</div><div class="meta">Learn Daily<br>5.2K views · 3 days ago</div></div></article>
+<article class="video" data-category="Sports"><div class="thumb" style="background:linear-gradient(135deg,#254c2a,#111)"><span class="visual">⚽</span><span class="play">▶</span><span class="duration">07:51</span></div><h3>Top sports moments you should see</h3><div class="creator"><div class="avatar">S</div><div class="meta">Sports Hub<br>19K views · 1 day ago</div></div></article>
+<article class="video" data-category="Entertainment"><div class="thumb" style="background:linear-gradient(135deg,#502b2b,#171717)"><span class="visual">★</span><span class="play">▶</span><span class="duration">14:20</span></div><h3>Stories, creativity and entertainment</h3><div class="creator"><div class="avatar">C</div><div class="meta">Creative Studio<br>3.1K views · 4 days ago</div></div></article></div></section>
+<div class="adslot"><b>ADVERTISEMENT · VIDEO AD SLOT</b>Pre-roll / mid-roll video advertising integration area</div>
+<section><div class="sectionhead"><h2>Shorts</h2><a href="#">Explore Shorts</a></div><div class="shorts"><div class="short"><strong>Make every<br>second count</strong><span>▶ 18K views</span></div><div class="short"><strong>Ideas in<br>motion</strong><span>▶ 9.2K views</span></div><div class="short"><strong>Daily<br>inspiration</strong><span>▶ 32K views</span></div><div class="short"><strong>Moments<br>that matter</strong><span>▶ 6.7K views</span></div><div class="short"><strong>Discover<br>something new</strong><span>▶ 14K views</span></div></div></section>
+<div class="adslot"><b>ADVERTISEMENT · SPONSORED CONTENT</b>Clearly labelled brand partnership / sponsored video placement</div></main></div>
+<nav class="bottom-nav" aria-label="Bottom navigation">
+  <button class="bottom-item active" onclick="setBottomActive(this)"><span>⌂</span><small>Home</small></button>
+  <button class="bottom-item" onclick="setBottomActive(this)"><span>▶</span><small>Shorts</small></button>
+  <button class="bottom-item" onclick="setBottomActive(this)"><span>▣</span><small>Subscriptions</small></button>
+</nav>
+<footer><span>© 2026 CLIPJAT · WATCH BEYOND LIMITS</span><span>About · Help · Terms · Privacy · Advertise</span><span>Homepage design preview · Demo content</span></footer>
+<script>function toggleDrawer(force){const d=document.getElementById('drawer'),s=document.getElementById('drawerScrim');const open=typeof force==='boolean'?force:!d.classList.contains('open');d.classList.toggle('open',open);s.classList.toggle('show',open)}function setBottomActive(btn){document.querySelectorAll('.bottom-item').forEach(x=>x.classList.remove('active'));btn.classList.add('active')}function filterVideos(cat,btn){document.querySelectorAll('.chip').forEach(x=>x.classList.remove('active'));btn.classList.add('active');document.querySelectorAll('.video').forEach(v=>v.style.display=cat==='All'||v.dataset.category===cat?'block':'none')}function searchVideos(){let q=document.getElementById('search').value.toLowerCase();document.querySelectorAll('.video').forEach(v=>v.style.display=v.innerText.toLowerCase().includes(q)?'block':'none')}document.getElementById('search').addEventListener('keydown',e=>{if(e.key==='Enter')searchVideos()});</script>
+</body></html>
