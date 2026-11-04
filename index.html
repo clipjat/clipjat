@@ -121,7 +121,7 @@ async function getUserChannel(){
     .maybeSingle();
   if(error){
     console.error('Channel lookup error:', error);
-    alert('Channel তথ্য পাওয়া যায়নি: ' + error.message);
+    alert('Could not retrieve channel information: ' + error.message);
     return null;
   }
   return data;
@@ -160,26 +160,26 @@ function updateAuthUI(user){
 }
 async function openChannel(){
   if(!currentUser){
-    alert('Your channel খুলতে আগে Google দিয়ে লগইন করতে হবে।');
+    alert('Please sign in with Google before opening your channel.');
     signInWithGoogle();
     return;
   }
 
   const existingChannel = await getUserChannel();
   if(existingChannel){
-    alert('তোমার Clipjat Channel: ' + existingChannel.channel_name);
+    alert('Your Clipjat channel: ' + existingChannel.channel_name);
     toggleDrawer(false);
     return;
   }
 
-  const entered = prompt('তোমার Clipjat Channel-এর নাম কী হবে? (১–৫০ অক্ষর)');
+  const entered = prompt('What would you like to name your Clipjat channel? (1–50 characters)');
   if(!entered || !entered.trim()){
-    alert('Channel তৈরি করা হয়নি।');
+    alert('Channel creation was cancelled.');
     return;
   }
   const channelName = entered.trim();
   if(channelName.length > 50){
-    alert('Channel-এর নাম সর্বোচ্চ ৫০ অক্ষরের হতে পারবে।');
+    alert('Channel names can be no longer than 50 characters.');
     return;
   }
 
@@ -191,29 +191,29 @@ async function openChannel(){
 
   if(error){
     if(error.code === '23505'){
-      alert('এই Google অ্যাকাউন্টে ইতিমধ্যে একটি Channel আছে। পেজ Refresh করে আবার চেষ্টা করো।');
+      alert('This Google account already has a channel. Refresh the page and try again.');
     }else{
-      alert('Channel তৈরি করা যায়নি: ' + error.message);
+      alert('Could not create the channel: ' + error.message);
     }
     return;
   }
 
-  alert('অভিনন্দন! তোমার Clipjat Channel তৈরি হয়েছে: ' + data.channel_name);
+  alert('Congratulations! Your Clipjat channel has been created: ' + data.channel_name);
   toggleDrawer(false);
 }
 async function requestUpload(){
   if(!currentUser){
-    alert('ভিডিও আপলোড করতে আগে Google দিয়ে লগইন করো।');
+    alert('Please sign in with Google before uploading a video.');
     signInWithGoogle();
     return;
   }
   const channel = await getUserChannel();
   if(!channel){
-    alert('ভিডিও আপলোডের আগে তোমাকে একটি Clipjat Channel খুলতে হবে।');
+    alert('You need to create a Clipjat channel before uploading videos.');
     await openChannel();
     return;
   }
-  alert('তোমার Channel আছে। তবে ভিডিও Upload চালু করার জন্য Video Storage ও Upload System এখনো তৈরি করা বাকি।');
+  alert('Your channel is ready. However, video storage and the upload system have not been implemented yet.');
 }
 supabaseClient.auth.getSession().then(({data})=>updateAuthUI(data.session?.user || null));
 supabaseClient.auth.onAuthStateChange((_event, session)=>updateAuthUI(session?.user || null));
