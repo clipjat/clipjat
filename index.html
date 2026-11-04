@@ -58,18 +58,20 @@
 }
 </style>
 
+<style>.drawer-account{padding:0 8px 14px;margin:0 0 8px;border-bottom:1px solid var(--line)}.drawer-auth-btn{width:100%;background:#211b10;border:1px solid var(--gold);color:var(--gold);border-radius:10px;padding:12px 10px;font-weight:bold;text-align:center}.drawer-user{color:#cfc6b6;font-size:12px;padding:9px 4px 0;overflow-wrap:anywhere}</style>
 </head><body>
-<header><button class="menu-toggle" onclick="toggleDrawer()" aria-label="Open menu">☰</button><div class="brand"><div class="mark">▶</div><div class="brandname">CLIP<span>JAT</span></div></div><div class="search"><input id="search" placeholder="Search videos, creators..." aria-label="Search"><button onclick="searchVideos()">⌕</button></div><div class="actions"><button class="pill" onclick="alert('Sign-in will be added in a future version.')">Sign in</button><button class="goldbtn" onclick="alert('Video upload will be available when accounts and video storage are connected.')">＋ Upload</button></div></header>
+<header><button class="menu-toggle" onclick="toggleDrawer()" aria-label="Open menu">☰</button><div class="brand"><div class="mark">▶</div><div class="brandname">CLIP<span>JAT</span></div></div><div class="search"><input id="search" placeholder="Search videos, creators..." aria-label="Search"><button onclick="searchVideos()">⌕</button></div><div class="actions"><button class="goldbtn" onclick="requestUpload()">＋ Upload</button></div></header>
 <div class="layout">
 <aside class="side" id="drawer" aria-label="Main menu">
-  <div class="drawer-head"><strong>CLIP<span>JAT</span> MENU</strong><button class="drawer-close" onclick="toggleDrawer(false)" aria-label="Close menu">×</button></div>
+  <div class="drawer-head"><strong>CLIP<span>JAT</span></strong><button class="drawer-close" onclick="toggleDrawer(false)" aria-label="Close menu">×</button></div>
+  <div class="drawer-account"><button class="drawer-auth-btn" id="signInBtn" onclick="signInWithGoogle()">Continue with Google</button><button class="drawer-auth-btn" id="signOutBtn" style="display:none" onclick="signOut()">Sign out</button><div id="drawerUser" class="drawer-user" style="display:none"></div></div>
   <div class="navitem active"><span class="navicon">⌂</span><span class="label">Home</span></div>
   <div class="navitem"><span class="navicon">▶</span><span class="label">Shorts</span></div>
   <div class="navitem"><span class="navicon">▣</span><span class="label">Subscriptions</span></div>
   <hr>
   <div class="navitem"><span class="navicon">◷</span><span class="label">History</span></div>
   <div class="navitem"><span class="navicon">♡</span><span class="label">Liked videos</span></div>
-  <div class="navitem"><span class="navicon">♙</span><span class="label">Your channel</span></div>
+  <div class="navitem" role="button" tabindex="0" onclick="openChannel()"><span class="navicon">♙</span><span class="label">Your channel</span></div>
   <hr><small>CREATOR & ACCOUNT</small>
   <div class="navitem"><span class="navicon">◈</span><span class="label">Creator Studio</span></div>
   <div class="navitem"><span class="navicon">＄</span><span class="label">Monetization</span></div>
@@ -95,6 +97,93 @@
   <button class="bottom-item" onclick="setBottomActive(this)"><span>▶</span><small>Shorts</small></button>
   <button class="bottom-item" onclick="setBottomActive(this)"><span>▣</span><small>Subscriptions</small></button>
 </nav>
-<footer><span>© 2026 CLIPJAT · WATCH BEYOND LIMITS</span><span>About · Help · Terms · Privacy · Advertise</span><span>Homepage design preview · Demo content</span></footer>
-<script>function toggleDrawer(force){const d=document.getElementById('drawer'),s=document.getElementById('drawerScrim');const open=typeof force==='boolean'?force:!d.classList.contains('open');d.classList.toggle('open',open);s.classList.toggle('show',open)}function setBottomActive(btn){document.querySelectorAll('.bottom-item').forEach(x=>x.classList.remove('active'));btn.classList.add('active')}function filterVideos(cat,btn){document.querySelectorAll('.chip').forEach(x=>x.classList.remove('active'));btn.classList.add('active');document.querySelectorAll('.video').forEach(v=>v.style.display=cat==='All'||v.dataset.category===cat?'block':'none')}function searchVideos(){let q=document.getElementById('search').value.toLowerCase();document.querySelectorAll('.video').forEach(v=>v.style.display=v.innerText.toLowerCase().includes(q)?'block':'none')}document.getElementById('search').addEventListener('keydown',e=>{if(e.key==='Enter')searchVideos()});</script>
+<footer><span>© 2026 CLIPJAT · WATCH BEYOND LIMITS</span><span>About · Help · Terms · Privacy · Advertise</span><span id="authStatus">Sign in to your Clipjat account</span></footer>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const SUPABASE_URL = 'https://hwihzsogquxmpcbmoidd.supabase.co';
+const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_n9ZC5o59dE8gUsZvWABgGg_eAt_PNdS';
+const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+
+function toggleDrawer(force){const d=document.getElementById('drawer'),s=document.getElementById('drawerScrim');const open=typeof force==='boolean'?force:!d.classList.contains('open');d.classList.toggle('open',open);s.classList.toggle('show',open)}
+function setBottomActive(btn){document.querySelectorAll('.bottom-item').forEach(x=>x.classList.remove('active'));btn.classList.add('active')}
+function filterVideos(cat,btn){document.querySelectorAll('.chip').forEach(x=>x.classList.remove('active'));btn.classList.add('active');document.querySelectorAll('.video').forEach(v=>v.style.display=cat==='All'||v.dataset.category===cat?'block':'none')}
+function searchVideos(){let q=document.getElementById('search').value.toLowerCase();document.querySelectorAll('.video').forEach(v=>v.style.display=v.innerText.toLowerCase().includes(q)?'block':'none')}
+document.getElementById('search').addEventListener('keydown',e=>{if(e.key==='Enter')searchVideos()});
+
+let currentUser = null;
+
+function channelStorageKey(user){ return 'clipjat_demo_channel_' + user.id; }
+function getDemoChannel(){
+  if(!currentUser) return null;
+  return localStorage.getItem(channelStorageKey(currentUser));
+}
+async function signInWithGoogle(){
+  const { error } = await supabaseClient.auth.signInWithOAuth({
+    provider: 'google',
+    options: { redirectTo: 'https://clipjat.github.io/clipjat/' }
+  });
+  if(error) alert('Google sign-in could not start: ' + error.message);
+}
+async function signOut(){
+  const { error } = await supabaseClient.auth.signOut();
+  if(error) alert('Sign out failed: ' + error.message);
+  else toggleDrawer(false);
+}
+function updateAuthUI(user){
+  currentUser = user || null;
+  const signIn = document.getElementById('signInBtn');
+  const signOutBtn = document.getElementById('signOutBtn');
+  const drawerUser = document.getElementById('drawerUser');
+  const status = document.getElementById('authStatus');
+  if(user){
+    signIn.style.display='none';
+    signOutBtn.style.display='block';
+    drawerUser.style.display='block';
+    drawerUser.textContent='Signed in: ' + (user.email || 'Google account');
+    status.textContent='Signed in as ' + (user.email || 'Google user');
+  }else{
+    signIn.style.display='block';
+    signOutBtn.style.display='none';
+    drawerUser.style.display='none';
+    drawerUser.textContent='';
+    status.textContent='Sign in to your Clipjat account';
+  }
+}
+function openChannel(){
+  if(!currentUser){
+    alert('Your channel খুলতে আগে Google দিয়ে লগইন করতে হবে।');
+    signInWithGoogle();
+    return;
+  }
+  let channelName = getDemoChannel();
+  if(!channelName){
+    const entered = prompt('তোমার Clipjat channel-এর নাম কী হবে?');
+    if(!entered || !entered.trim()){
+      alert('Channel তৈরি না করলে Your channel খোলা যাবে না।');
+      return;
+    }
+    channelName = entered.trim();
+    localStorage.setItem(channelStorageKey(currentUser), channelName);
+    alert('Demo channel তৈরি হয়েছে: ' + channelName + '\\n\\nএটি আপাতত এই ব্রাউজারেই সংরক্ষিত। স্থায়ী channel তৈরির জন্য পরের ধাপে database যুক্ত করতে হবে।');
+  }else{
+    alert('তোমার channel: ' + channelName + '\\n\\nChannel page ও database এখনো তৈরি করা বাকি।');
+  }
+  toggleDrawer(false);
+}
+function requestUpload(){
+  if(!currentUser){
+    alert('ভিডিও আপলোড করতে আগে Google দিয়ে লগইন করো।');
+    signInWithGoogle();
+    return;
+  }
+  if(!getDemoChannel()){
+    alert('ভিডিও আপলোডের আগে তোমাকে একটি Clipjat channel খুলতে হবে।');
+    openChannel();
+    return;
+  }
+  alert('তোমার channel তৈরি হয়েছে। তবে নিরাপদ video upload, storage ও database এখনো যুক্ত করা হয়নি—সেগুলো যুক্ত হলে upload চালু হবে।');
+}
+supabaseClient.auth.getSession().then(({data})=>updateAuthUI(data.session?.user || null));
+supabaseClient.auth.onAuthStateChange((_event, session)=>updateAuthUI(session?.user || null));
+</script>
 </body></html>
